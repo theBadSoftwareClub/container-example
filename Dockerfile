@@ -1,9 +1,7 @@
-FROM node:current-slim
-#RUN mkdir -p /usr/src/app
+FROM node:14
 EXPOSE 3000
-COPY ./game /usr/src/app/game
 WORKDIR /usr/src/app
-COPY ./server/package.json /usr/src/app
+COPY server/. /usr/src/app
 RUN npm install
-COPY ./server .
+COPY game /usr/src/app/game/
 CMD npm run start

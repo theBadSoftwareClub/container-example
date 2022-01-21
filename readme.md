@@ -38,6 +38,9 @@ In this section I'll describe in short how you can configure mk.js.
 * `isHost` - used in `network` game, tells the game controller whether the current user have created the game.
 * `reset` - a method which reset the game. It clean some references and call the reset methods of lower level components. Calling it will lead to removal of the game canvas.
 
+# Run in container
+with Docker installed, run 'docker build . -t kombat  && docker run -p "80:3000" kombat'
+
 # License
 
 This software is distributed under the terms of the MIT license.
