@@ -1,22 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kombat-deployment
+  name: goof
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kombat-app
+      app: goof-label
   template:
     metadata:
       labels:
-        app: kombat-app
+        app: goof-label
     spec:
       containers:
-      - name: kombat
-        image: thebadsoftwareclub/kombat
-        imagePullPolicy: Never
+      - name: goof
+        image: thebadsoftwareclub/goof
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
-          hostPort: 80
+        securityContext:
+          capabilities:
+            add: [ "CAP_SYS_ADMIN" ]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: goofservice
+  labels:
+    app: goof
+spec:
+  ports:
+  - port: 3000
+    targetPort: 3000
+  selector:
+    app: goof-label
+  type: LoadBalancer
 
